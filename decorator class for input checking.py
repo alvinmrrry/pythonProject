@@ -4,16 +4,36 @@ class DeracotorClass:
 
     def deracotor1(self,func): # 因为该装饰方法是定义在类中所以这里需要加一个self
 
+        """
+        Decorator function for methods in class
+
+        Checks if the email format is correct, if not returns None
+
+        Args:
+            self: Object instance of the class
+            *args: Positional arguments
+            **kwargs: Keyword arguments
+
+        Returns:
+            The result of the decorated function or None if email is not in correct format
+        """
         def inner(self, *args, **kwargs):
             print('开始装饰1')
+
+            # Import regex module for email format checking
             import re
+
+            # Regular expression for email format
             str = r"[^@]+@[^@]+\.[^@]+"
+
+            # Check if email matches the format
             if re.match(str, args[0]):
                 print('邮箱格式正确')
                 res = func(self,*args,**kwargs)
             else:
-                print('邮箱格式错误')
+                print('邮簽格式錯誤')
                 res = None
+
             print('结束装饰1')
             return res
         return inner
